@@ -1,4 +1,4 @@
-%% lzo_test.erl -- unit test for wrapper of the LZO1x algorithm
+%% lzo_test.erl -- unit test for wrapper of the elzo library
 %%
 %% This file is part of the erlang elzo data compression library.
 %% Copyright (C) 2015 Oleksandr Chumachenko
