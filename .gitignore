@@ -1,5 +1,6 @@
 ebin
 priv
+doc
 .eunit
 *.o
 *.lo

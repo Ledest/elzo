@@ -48,12 +48,17 @@ load_nif() ->
     L = filename:join(P, "lzo1"),
     erlang:load_nif(L, {?LZO1_NIF_VSN, unicode:characters_to_binary(L, E, E)}).
 
-zip(_IoList) -> exit(lzo1_nif_not_loaded).
+-spec zip(Data::binary()|iodata()) -> binary().
+zip(_Data) -> exit(lzo1_nif_not_loaded).
 
-unzip(_IoList, _MaxSize) -> exit(lzo1_nif_not_loaded).
+-spec unzip(Data::binary()|iodata(), MaxSize::integer()) -> binary().
+unzip(_Data, _MaxSize) -> exit(lzo1_nif_not_loaded).
 
-unzip(_IoList) -> exit(lzo1_nif_not_loaded).
+-spec unzip(Data::binary()|iodata()) -> binary().
+unzip(_Data) -> exit(lzo1_nif_not_loaded).
 
-compress(_IoList) -> exit(lzo1_nif_not_loaded).
+-spec compress(Data::binary()|iodata()) -> binary().
+compress(_Data) -> exit(lzo1_nif_not_loaded).
 
-decompress(_IoList) -> exit(lzo1_nif_not_loaded).
+-spec decompress(Data::binary()|iodata()) -> binary().
+decompress(_Data) -> exit(lzo1_nif_not_loaded).
