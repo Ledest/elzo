@@ -39,7 +39,7 @@ static inline ERL_NIF_TERM make_error(ErlNifEnv *env, const char *msg)
 	return enif_make_tuple2(env, enif_make_atom(env, "error"), enif_make_atom(env, msg));
 }
 
-ERL_NIF_TERM lzo2_zip(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+static ERL_NIF_TERM lzo2_zip(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
 	ErlNifBinary i, o;
 	lzo_uint os;
@@ -104,7 +104,7 @@ static ERL_NIF_TERM lzo2_unzip(ErlNifEnv* env, ErlNifBinary *i, size_t os)
 	         : make_error(env, "insufficient_memory");
 }
 
-ERL_NIF_TERM lzo2_unzip_2(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+static ERL_NIF_TERM lzo2_unzip_2(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
 	ErlNifBinary i;
 	size_t ms;
@@ -114,7 +114,7 @@ ERL_NIF_TERM lzo2_unzip_2(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 	       : enif_make_badarg(env);
 }
 
-ERL_NIF_TERM lzo2_unzip_1(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+static ERL_NIF_TERM lzo2_unzip_1(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
 	ErlNifBinary i;
 
@@ -124,7 +124,7 @@ ERL_NIF_TERM lzo2_unzip_1(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 	return lzo2_unzip(env, &i, i.size * 256);
 }
 
-ERL_NIF_TERM lzo2_compress(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+static ERL_NIF_TERM lzo2_compress(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
 	ErlNifBinary i, o;
 	lzo_uint os;
@@ -145,7 +145,7 @@ ERL_NIF_TERM lzo2_compress(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 	       : make_ok(env, enif_make_binary(env, &o));
 }
 
-ERL_NIF_TERM lzo2_decompress(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+static ERL_NIF_TERM lzo2_decompress(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
 	ErlNifBinary i, o;
 	int c;
@@ -162,7 +162,7 @@ ERL_NIF_TERM lzo2_decompress(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[]
 	       : lzo2_unzip_error(env, c);
 }
 
-int on_load(ErlNifEnv *env, void **priv, ERL_NIF_TERM info)
+static int on_load(ErlNifEnv *env, void **priv, ERL_NIF_TERM info)
 {
 #if LZO_E_OK == 0
 	return lzo_init();
@@ -173,12 +173,12 @@ int on_load(ErlNifEnv *env, void **priv, ERL_NIF_TERM info)
 #endif
 }
 
-int on_reload(ErlNifEnv *env, void**priv, ERL_NIF_TERM info)
+static int on_reload(ErlNifEnv *env, void**priv, ERL_NIF_TERM info)
 {
 	return 0;
 }
 
-int on_upgrade(ErlNifEnv *env, void **priv, void** old_priv, ERL_NIF_TERM info)
+static int on_upgrade(ErlNifEnv *env, void **priv, void** old_priv, ERL_NIF_TERM info)
 {
 	return 0;
 }
