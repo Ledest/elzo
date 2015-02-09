@@ -28,6 +28,9 @@
 lzo1_test_() ->
     {timeout, 60, [fun lzo1/0]}.
 
+lzo1a_test_() ->
+    {timeout, 60, [fun lzo1a/0]}.
+
 lzo2_test_() ->
     {timeout, 60, [fun lzo2/0]}.
 
@@ -40,6 +43,20 @@ lzo1() ->
     Decompressed3 = lzo1:unzip(Compressed1),
     {ok, Compressed4} = lzo1:compress(Data),
     {ok, Decompressed4} = lzo1:decompress(Compressed4),
+    ?assertEqual(Data, Decompressed1),
+    ?assertEqual(Data, Decompressed2),
+    ?assertEqual(Data, Decompressed3),
+    ?assertEqual(Data, Decompressed4).
+
+lzo1a() ->
+    {ok, Data} = file:read_file("../README.md"),
+    io:fwrite("~p~n", [file:get_cwd()]),
+    Compressed1 = lzo1a:zip(Data),
+    Decompressed1 = lzo1a:unzip(Compressed1, size(Data) * 256),
+    Decompressed2 = lzo1a:unzip(Compressed1, size(Data)),
+    Decompressed3 = lzo1a:unzip(Compressed1),
+    {ok, Compressed4} = lzo1a:compress(Data),
+    {ok, Decompressed4} = lzo1a:decompress(Compressed4),
     ?assertEqual(Data, Decompressed1),
     ?assertEqual(Data, Decompressed2),
     ?assertEqual(Data, Decompressed3),
