@@ -24,7 +24,7 @@
 
 -module(lzo2).
 
--export([zip/1, unzip/1, unzip/2, compress/1, decompress/1]).
+-export([zip/1, unzip/1, unzip/2, compress/1, uncompress/1, decompress/1]).
 
 -on_load(load_nif/0).
 -define(LZO2_NIF_VSN, 1).
@@ -59,6 +59,9 @@ unzip(_Data) -> exit(lzo2_nif_not_loaded).
 
 -spec compress(Data::iodata()) -> binary().
 compress(_Data) -> exit(lzo2_nif_not_loaded).
+
+-spec uncompress(Data::iodata()) -> binary().
+uncompress(_Data) -> exit(lzo2_nif_not_loaded).
 
 -spec decompress(Data::iodata()) -> binary().
 decompress(_Data) -> exit(lzo2_nif_not_loaded).

@@ -43,10 +43,12 @@ lzo1() ->
     Decompressed3 = lzo1:unzip(Compressed1),
     {ok, Compressed4} = lzo1:compress(Data),
     {ok, Decompressed4} = lzo1:decompress(Compressed4),
+    {ok, Decompressed5} = lzo1:uncompress(Compressed4),
     ?assertEqual(Data, Decompressed1),
     ?assertEqual(Data, Decompressed2),
     ?assertEqual(Data, Decompressed3),
-    ?assertEqual(Data, Decompressed4).
+    ?assertEqual(Data, Decompressed4),
+    ?assertEqual(Data, Decompressed5).
 
 lzo1a() ->
     {ok, Data} = file:read_file("../README.md"),
@@ -57,10 +59,12 @@ lzo1a() ->
     Decompressed3 = lzo1a:unzip(Compressed1),
     {ok, Compressed4} = lzo1a:compress(Data),
     {ok, Decompressed4} = lzo1a:decompress(Compressed4),
+    {ok, Decompressed5} = lzo1a:uncompress(Compressed4),
     ?assertEqual(Data, Decompressed1),
     ?assertEqual(Data, Decompressed2),
     ?assertEqual(Data, Decompressed3),
-    ?assertEqual(Data, Decompressed4).
+    ?assertEqual(Data, Decompressed4),
+    ?assertEqual(Data, Decompressed5).
 
 lzo2() ->
     {ok, Data} = file:read_file("../README.md"),
@@ -70,7 +74,9 @@ lzo2() ->
     Decompressed3 = lzo2:unzip(Compressed1),
     {ok, Compressed4} = lzo2:compress(Data),
     {ok, Decompressed4} = lzo2:decompress(Compressed4),
+    {ok, Decompressed5} = lzo2:uncompress(Compressed4),
     ?assertEqual(Data, Decompressed1),
     ?assertEqual(Data, Decompressed2),
     ?assertEqual(Data, Decompressed3),
-    ?assertEqual(Data, Decompressed4).
+    ?assertEqual(Data, Decompressed4),
+    ?assertEqual(Data, Decompressed5).
